@@ -1,0 +1,8 @@
+gymnasium[box2d] >=0.29.1
+stable-baselines3[extra] >=2.2.1
+numpy
+matplotlib
+typing-extensions
+pyyaml
+ruff
+black

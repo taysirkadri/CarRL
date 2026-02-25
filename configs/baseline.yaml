@@ -1,0 +1,14 @@
+# Baseline PPO config for CarRacing-v3
+algo: PPO
+total_timesteps: 1000000
+seed: 0
+save_path: models/baseline.zip
+log_dir: logs
+n_envs: 4
+eval_freq: 50000
+eval_episodes: 5
+vec_norm: true
+grayscale: true
+resize: 84
+frame_stack: 4
+clip_action: true
