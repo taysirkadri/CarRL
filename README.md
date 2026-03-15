@@ -5,11 +5,12 @@ A clean, end-to-end reinforcement learning pipeline for self-driving in
 using raw pixel input.
 
 <p align="center">
-  <img src="assets/carracing_raw.png" width="360" alt="CarRacing-v3 environment" />
+    <img src="assets/linkedin_hero.png" width="49%" alt="LinkedIn hero banner" />
+ 
 </p>
 
 <p align="center">
-  <img src="assets/linkedin_hero.png" width="49%" alt="LinkedIn hero banner" />
+   <img src="assets/carracing_raw.png" width="360" alt="CarRacing-v3 environment" />
   <img src="assets/linkedin_preprocessing.png" width="49%" alt="LinkedIn preprocessing panel" />
 </p>
 <p align="center">
@@ -40,21 +41,6 @@ using raw pixel input.
 
 
 
-
-## Asset Inventory
-
-All repository assets currently used in documentation/posting:
-
-| File | Purpose |
-|------|---------|
-| `assets/carracing_raw.png` | Raw CarRacing frame preview |
-| `assets/architecture.png` | Training pipeline architecture figure |
-| `assets/preprocessing_pipeline.png` | Preprocessing steps overview |
-| `assets/linkedin_hero.png` | LinkedIn cover/hero visual |
-| `assets/linkedin_preprocessing.png` | LinkedIn preprocessing visual |
-| `assets/linkedin_pipeline.png` | LinkedIn architecture visual |
-| `assets/linkedin_results.png` | LinkedIn real-metrics result visual |
-| `assets/linkedin_post.mp4` | LinkedIn-ready demo video clip |
 
 ## Quick Start
 
@@ -160,10 +146,9 @@ Key options: `n_envs`, `vec_norm`, `frame_stack`, `resize`,
 
 ```
 carRL/
-├── assets/             # README images + LinkedIn visuals/video
+├── assets/             # README images + visuals/video
 ├── configs/            # YAML experiment configs
-├── generate_assets.py  # Generate README showcase images
-├── generate_linkedin_assets.py  # Generate LinkedIn visual pack
+├── generate_assets.py  # creating README showcase images
 ├── src/carRL/
 │   ├── cli.py          # Installable CLI entry point
 │   ├── envs/           # Gymnasium wrappers
