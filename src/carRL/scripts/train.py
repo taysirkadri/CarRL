@@ -13,7 +13,7 @@ from __future__ import annotations
 import argparse
 from dataclasses import dataclass, asdict
 from pathlib import Path
-from typing import Any, Dict, Optional, Tuple, Callable
+from typing import Any, Dict, Optional, Callable
 
 import yaml
 from stable_baselines3 import PPO, SAC
@@ -27,9 +27,7 @@ from stable_baselines3.common.vec_env import (
     VecEnv,
 )
 
-# ✅ IMPORTANT: update import to match your package layout
-# Put make_wrapped_carracing in: src/carrl/envs/make_env.py (recommended)
-from carrl.envs.make_env import make_wrapped_carracing  # type: ignore
+from carRL.envs import make_wrapped_carracing
 
 
 ALGOS = {"PPO": PPO, "SAC": SAC}
@@ -160,7 +158,8 @@ def build_vec_env(cfg: TrainConfig) -> VecEnv:
     env = vec_cls([make_env_fn(cfg, i, is_eval=False) for i in range(cfg.n_envs)])
     env = VecTransposeImage(env)  # (H,W,C) -> (C,H,W) for CNN policies
     if cfg.vec_norm:
-        env = VecNormalize(env, norm_obs=True, norm_reward=True, clip_obs=10.0)
+        # norm_obs=False for image envs: CnnPolicy divides by 255 internally
+        env = VecNormalize(env, norm_obs=False, norm_reward=True)
     return env
 
 
@@ -169,21 +168,17 @@ def build_eval_env(cfg: TrainConfig) -> VecEnv:
     env = DummyVecEnv([make_env_fn(cfg, 999, is_eval=True)])
     env = VecTransposeImage(env)
     if cfg.vec_norm:
-        # IMPORTANT:
-        # For eval, we usually keep obs normalization ON (same stats),
-        # and reward normalization OFF for unbiased reward reporting.
-        env = VecNormalize(env, norm_obs=True, norm_reward=False, clip_obs=10.0)
+        env = VecNormalize(env, norm_obs=False, norm_reward=False)
     return env
 
 
 def sync_vecnormalize(train_env: VecEnv, eval_env: VecEnv) -> None:
     """
-    Ensures eval env uses the same obs normalization statistics as training env.
-    SB3 stores stats inside VecNormalize wrapper.
+    Ensures eval env uses the same reward normalization statistics as training env.
     """
     if isinstance(train_env, VecNormalize) and isinstance(eval_env, VecNormalize):
-        eval_env.obs_rms = train_env.obs_rms
-        # Do NOT sync return_rms if norm_reward=False (keeps reporting real rewards)
+        if hasattr(train_env, "ret_rms") and hasattr(eval_env, "ret_rms"):
+            eval_env.ret_rms = train_env.ret_rms
 
 
 # ---------------------------
@@ -241,9 +236,12 @@ def save_artifacts(cfg: TrainConfig, model, train_env: VecEnv) -> None:
 # Main
 # ---------------------------
 
-def main() -> None:
-    args = parse_args()
-    cfg = build_config(args)
+def main(config_path: str | None = None) -> None:
+    if config_path is not None:
+        cfg = merge_config(TrainConfig(), load_yaml(config_path))
+    else:
+        args = parse_args()
+        cfg = build_config(args)
 
     log_dir = Path(cfg.log_dir)
     log_dir.mkdir(parents=True, exist_ok=True)

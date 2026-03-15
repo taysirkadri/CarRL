@@ -1,11 +1,11 @@
-# SAC config for continuous-action comparison
-algo: SAC
-total_timesteps: 1000000
+# PPO config with tuned hyperparameters
+algo: PPO
+total_timesteps: 2000000
 seed: 0
-save_path: models/sac.zip
-log_dir: logs/sac
+save_path: models/ppo.zip
+log_dir: logs/ppo
 
-n_envs: 1
+n_envs: 8
 eval_freq: 25000
 eval_episodes: 5
 checkpoint_freq: 50000
