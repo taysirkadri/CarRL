@@ -29,8 +29,6 @@ using raw pixel input.
   <img src="assets/preprocessing_pipeline.png" width="720" alt="Preprocessing pipeline" />
 </p>
 
-## LinkedIn Asset Pack
-
 <p align="center">
   <img src="assets/linkedin_hero.png" width="49%" alt="LinkedIn hero banner" />
   <img src="assets/linkedin_preprocessing.png" width="49%" alt="LinkedIn preprocessing panel" />
