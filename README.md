@@ -8,6 +8,15 @@ using raw pixel input.
   <img src="assets/carracing_raw.png" width="360" alt="CarRacing-v3 environment" />
 </p>
 
+<p align="center">
+  <img src="assets/linkedin_hero.png" width="49%" alt="LinkedIn hero banner" />
+  <img src="assets/linkedin_preprocessing.png" width="49%" alt="LinkedIn preprocessing panel" />
+</p>
+<p align="center">
+  <img src="assets/linkedin_pipeline.png" width="49%" alt="LinkedIn architecture panel" />
+  <img src="assets/linkedin_results.png" width="49%" alt="LinkedIn results panel" />
+</p>
+
 ## Features
 
 - **PPO / SAC agents** via Stable-Baselines3
@@ -29,16 +38,8 @@ using raw pixel input.
   <img src="assets/preprocessing_pipeline.png" width="720" alt="Preprocessing pipeline" />
 </p>
 
-<p align="center">
-  <img src="assets/linkedin_hero.png" width="49%" alt="LinkedIn hero banner" />
-  <img src="assets/linkedin_preprocessing.png" width="49%" alt="LinkedIn preprocessing panel" />
-</p>
-<p align="center">
-  <img src="assets/linkedin_pipeline.png" width="49%" alt="LinkedIn architecture panel" />
-  <img src="assets/linkedin_results.png" width="49%" alt="LinkedIn results panel" />
-</p>
 
-**Video demo:** [`assets/linkedin_post.mp4`](assets/linkedin_post.mp4)
+
 
 ## Asset Inventory
 
